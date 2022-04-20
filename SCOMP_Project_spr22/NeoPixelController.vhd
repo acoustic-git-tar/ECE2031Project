@@ -42,7 +42,7 @@ architecture internals of NeoPixelController is
 	signal ram_write_data : std_logic_vector(23 downto 0);
 	-- Signal to store the current output pixel's color data
 	signal pixel_buffer : std_logic_vector(23 downto 0);
-
+	signal temp: std_logic_vector(23 downto 0);
 	-- Signal SCOMP will write to before it gets stored into memory
 	signal ram_write_buffer : std_logic_vector(23 downto 0);
 	
@@ -262,28 +262,6 @@ begin
 	process(clk_10M, resetn, cs_addr, cs_setAll)
 	begin
 
-		-- For this implementation, saving the memory address
-		-- doesn't require anything special.  Just latch it when
-		-- SCOMP sends it.
-		if resetn = '0' then
-			ram_write_addr <= x"00";
-		elsif rising_edge(clk_10M) then
-			-- If SCOMP is writing to the address register...
-			if (io_write = '1') and (cs_addr='1') then
-				ram_write_addr <= data_in(7 downto 0);
-			elsif (io_write = '1') and (cs_setAll = '1') then
-				ram_write_addr <= x"00";
-			-- settings requred for setting ALL pixels
-			elsif (wstate = setting_all) then
-				if ram_write_addr > x"FF" then
-					ram_write_addr <= x"00";
-				else
-				ram_write_addr <= ram_write_addr + 1;
-				end if;
-			elsif (wstate = storing) and (sstate = state_increment) then
-				ram_write_addr <= ram_write_addr + 1;
-			end if;
-		end if;
 	
 	
 		-- The sequnce of events needed to store data into memory will be
@@ -301,10 +279,12 @@ begin
 			wstate <= idle;
 			ram_we <= '0';
 			ram_write_buffer <= x"000000";
+			ram_write_addr <= x"00";
 			-- Note that resetting this device does NOT clear the memory.
 			-- Clearing memory would require cycling through each address
 			-- and setting them all to 0.
 		elsif rising_edge(clk_10M) then
+			
 			case wstate is
 			when idle =>
 				if (io_write = '1') and (cs_data='1') then
@@ -318,29 +298,41 @@ begin
 						-- default write
 						ram_write_buffer <= data_in(10 downto 5) & "00" & data_in(15 downto 11) & "000" & data_in(4 downto 0) & "000";
 						wstate <= storing;
+					
 					end if;
 					-- can raise ram_we on the upcoming transition, because data
 					-- won't be stored until next clock cycle.
 					ram_we <= '1';
 					-- Change state
+				elsif (io_write = '1') and (cs_addr='1') then
+					ram_write_addr <= data_in(7 downto 0);
 				-- write buffer settings for setting ALL pixels
 				elsif (io_write = '1') and (cs_setAll = '1') then
+					temp <= data_in(10 downto 5) & "00" & data_in(15 downto 11) & "000" & data_in(4 downto 0) & "000";
+					ram_write_addr <= x"00";
 					ram_write_buffer <= data_in(10 downto 5) & "00" & data_in(15 downto 11) & "000" & data_in(4 downto 0) & "000";
 					wstate <= setting_all;
 					ram_we <= '1';
 				end if;
 			when setting_all =>
-				if ram_write_addr > x"FF" then
-					wstate <= storing;
+				if ram_write_addr = x"FF" then
+					ram_write_addr <= x"00";
+					ram_we <= '0';
+					wstate <= idle;
 				else
-					ram_write_buffer <= data_in(10 downto 5) & "00" & data_in(15 downto 11) & "000" & data_in(4 downto 0) & "000";
+					ram_write_buffer <= temp;
+					ram_write_addr <= ram_write_addr + 1;
 				end if;
 			when storing =>
 				-- All that's needed here is to lower ram_we.  The RAM will be
 				-- storing data on this clock edge, so ram_we can go low at the
 				-- same time.
+				if sstate = state_increment then
+					ram_write_addr <= ram_write_addr + 1;
+				end if;
 				ram_we <= '0';
 				wstate <= idle;
+				
 			when others =>
 				wstate <= idle;
 			end case;

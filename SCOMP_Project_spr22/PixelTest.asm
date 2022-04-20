@@ -22,19 +22,735 @@
 ORG 0
 Loop:
 
-    ; IN     Switches
-ALL:
-
+	IN     Switches
+	ADDI   -1
+	JZERO  Amogus
 	
+	IN     Switches
+	ADDI   -2
+	JZERO  FullRGB
+	
+	IN     Switches
+	ADDI   -4
+	JZERO  Increment
+	
+	IN     Switches
+	ADDI   -8
+	JZERO  Terminate
+	
+	
+	JUMP   Loop
+; 160-191
+; 159-128
+; 96-127
+; 95-64
+; 32-63
+; 31-0
+Increment:
+	LOADI  0
+	OUT    PXL_A
+LoopI:
+	LOAD   red
+	OUT    PXL_D
+	CALL   Delay
+	LOAD   green
+	OUT    PXL_D
+	CALL   Delay
+	LOAD   blue
+	OUT    PXL_D
+	CALL   Delay
+	LOAD   uh
+	OUT    PXL_D
+	CALL   Delay
+	
+	JUMP   LoopI
+
+Amogus:
+	LOADI  2
+	OUT    PXL_SET
+Change:
+	
+	LOADI  0
+	OUT    PXL_A
+	
+	LOADI  0
+	OUT    PXL_D
+	LOAD   red
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   red
+	OUT    PXL_D
+	OUT	   PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	LOADI  57
+	OUT    PXL_A
+	
+	LOADI  0
+	OUT    PXL_D
+	LOAD   red
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   red
+	OUT    PXL_D
+	OUT	   PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	LOADI  64
+	OUT    PXL_A
+	
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   red
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  121
+	OUT    PXL_A
+	LOAD   red
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  128
+	OUT    PXL_A
+	LOAD   red
+	OUT    PXL_D
+	
+	LOAD   uh
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   red
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  185
+	OUT    PXL_A
+	
+	LOAD   zero
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   red
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	CALL   Delay
+	
+	LOADI  0
+	OUT    PXL_A
+	
+	LOADI  0
+	OUT    PXL_D
+	LOAD   green
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   green
+	OUT    PXL_D
+	OUT	   PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	LOADI  57
+	OUT    PXL_A
+	
+	LOADI  0
+	OUT    PXL_D
+	LOAD   green
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   green
+	OUT    PXL_D
+	OUT	   PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	LOADI  64
+	OUT    PXL_A
+	
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   green
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  121
+	OUT    PXL_A
+	LOAD   green
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  128
+	OUT    PXL_A
+	LOAD   green
+	OUT    PXL_D
+	
+	LOAD   uh
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   green
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  185
+	OUT    PXL_A
+	
+	LOAD   zero
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   green
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	CALL   Delay
+	
+	LOADI  0
+	OUT    PXL_A
+	
+	LOADI  0
+	OUT    PXL_D
+	LOAD   blue
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   blue
+	OUT    PXL_D
+	OUT	   PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	LOADI  57
+	OUT    PXL_A
+	
+	LOADI  0
+	OUT    PXL_D
+	LOAD   blue
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   blue
+	OUT    PXL_D
+	OUT	   PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	LOADI  64
+	OUT    PXL_A
+	
+	LOAD   zero
+	OUT    PXL_D
+	LOAD   blue
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  121
+	OUT    PXL_A
+	LOAD   blue
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  128
+	OUT    PXL_A
+	LOAD   blue
+	OUT    PXL_D
+	
+	LOAD   uh
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   blue
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	
+	LOADI  185
+	OUT    PXL_A
+	
+	LOAD   zero
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   blue
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	OUT    PXL_D
+	LOAD   zero
+	OUT    PXL_D
+	
+	CALL   Delay
+	JUMP   Change
+	
+	
+FullRGB:
+	LOADI  0
+	STORE  Curr_A
+	OUT    PXL_A
+	LOADI  1
+	OUT    PXL_SET
+	LOADI  12
+	OUT    PXL_A
+
+	CALL Print
+	JUMP   FullRGB
+	
+Print:
+	LOADI 160
+	OUT PXL_A
+
+	LOADI 153
+	OUT PXL_R
+	LOADI 204
+	OUT PXL_G
+	LOADI 111
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 161
+	OUT PXL_A
+
+	LOADI 89
+	OUT PXL_R
+	LOADI 164
+	OUT PXL_G
+	LOADI 63
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 162
+	OUT PXL_A
+
+	LOADI 155
+	OUT PXL_R
+	LOADI 204
+	OUT PXL_G
+	LOADI 112
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 163
+	OUT PXL_A
+
+	LOADI 212
+	OUT PXL_R
+	LOADI 217
+	OUT PXL_G
+	LOADI 195
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 164
+	OUT PXL_A
+
+	LOADI 138
+	OUT PXL_R
+	LOADI 195
+	OUT PXL_G
+	LOADI 30
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 165
+	OUT PXL_A
+
+	LOADI 65
+	OUT PXL_R
+	LOADI 108
+	OUT PXL_G
+	LOADI 55
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 159
+	OUT PXL_A
+
+	LOADI 111
+	OUT PXL_R
+	LOADI 167
+	OUT PXL_G
+	LOADI 68
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 158
+	OUT PXL_A
+
+	LOADI 22
+	OUT PXL_R
+	LOADI 24
+	OUT PXL_G
+	LOADI 19
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 157
+	OUT PXL_A
+
+	LOADI 125
+	OUT PXL_R
+	LOADI 193
+	OUT PXL_G
+	LOADI 84
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 156
+	OUT PXL_A
+
+	LOADI 45
+	OUT PXL_R
+	LOADI 116
+	OUT PXL_G
+	LOADI 40
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 155
+	OUT PXL_A
+
+	LOADI 26
+	OUT PXL_R
+	LOADI 29
+	OUT PXL_G
+	LOADI 20
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 154
+	OUT PXL_A
+
+	LOADI 214
+	OUT PXL_R
+	LOADI 220
+	OUT PXL_G
+	LOADI 192
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 96
+	OUT PXL_A
+
+	LOADI 50
+	OUT PXL_R
+	LOADI 148
+	OUT PXL_G
+	LOADI 37
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 97
+	OUT PXL_A
+
+	LOADI 0
+	OUT PXL_R
+	LOADI 0
+	OUT PXL_G
+	LOADI 0
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 98
+	OUT PXL_A
+
+	LOADI 131
+	OUT PXL_R
+	LOADI 194
+	OUT PXL_G
+	LOADI 63
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 99
+	OUT PXL_A
+
+	LOADI 89
+	OUT PXL_R
+	LOADI 160
+	OUT PXL_G
+	LOADI 56
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 100
+	OUT PXL_A
+
+	LOADI 1
+	OUT PXL_R
+	LOADI 1
+	OUT PXL_G
+	LOADI 3
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 101
+	OUT PXL_A
+
+	LOADI 134
+	OUT PXL_R
+	LOADI 195
+	OUT PXL_G
+	LOADI 56
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 95
+	OUT PXL_A
+
+	LOADI 148
+	OUT PXL_R
+	LOADI 199
+	OUT PXL_G
+	LOADI 107
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 94
+	OUT PXL_A
+
+	LOADI 124
+	OUT PXL_R
+	LOADI 191
+	OUT PXL_G
+	LOADI 85
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 93
+	OUT PXL_A
+
+	LOADI 29
+	OUT PXL_R
+	LOADI 31
+	OUT PXL_G
+	LOADI 26
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 92
+	OUT PXL_A
+
+	LOADI 23
+	OUT PXL_R
+	LOADI 30
+	OUT PXL_G
+	LOADI 22
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 91
+	OUT PXL_A
+
+	LOADI 194
+	OUT PXL_R
+	LOADI 204
+	OUT PXL_G
+	LOADI 169
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 90
+	OUT PXL_A
+
+	LOADI 86
+	OUT PXL_R
+	LOADI 163
+	OUT PXL_G
+	LOADI 51
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 32
+	OUT PXL_A
+
+	LOADI 146
+	OUT PXL_R
+	LOADI 199
+	OUT PXL_G
+	LOADI 109
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 33
+	OUT PXL_A
+
+	LOADI 33
+	OUT PXL_R
+	LOADI 38
+	OUT PXL_G
+	LOADI 31
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 34
+	OUT PXL_A
+
+	LOADI 19
+	OUT PXL_R
+	LOADI 21
+	OUT PXL_G
+	LOADI 18
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 35
+	OUT PXL_A
+
+	LOADI 20
+	OUT PXL_R
+	LOADI 20
+	OUT PXL_G
+	LOADI 18
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 36
+	OUT PXL_A
+
+	LOADI 34
+	OUT PXL_R
+	LOADI 40
+	OUT PXL_G
+	LOADI 26
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 37
+	OUT PXL_A
+
+	LOADI 205
+	OUT PXL_R
+	LOADI 213
+	OUT PXL_G
+	LOADI 190
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 31
+	OUT PXL_A
+
+	LOADI 131
+	OUT PXL_R
+	LOADI 182
+	OUT PXL_G
+	LOADI 89
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 30
+	OUT PXL_A
+
+	LOADI 52
+	OUT PXL_R
+	LOADI 56
+	OUT PXL_G
+	LOADI 57
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 29
+	OUT PXL_A
+
+	LOADI 134
+	OUT PXL_R
+	LOADI 194
+	OUT PXL_G
+	LOADI 96
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 28
+	OUT PXL_A
+
+	LOADI 158
+	OUT PXL_R
+	LOADI 205
+	OUT PXL_G
+	LOADI 109
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 27
+	OUT PXL_A
+
+	LOADI 51
+	OUT PXL_R
+	LOADI 55
+	OUT PXL_G
+	LOADI 41
+	OUT PXL_B
+	OUT PXL_D
+
+	LOADI 26
+	OUT PXL_A
+
+	LOADI 146
+	OUT PXL_R
+	LOADI 201
+	OUT PXL_G
+	LOADI 73
+	OUT PXL_B
+	OUT PXL_D
+
+
+	RETURN
+Terminate:
 	LOAD   red
 	OUT    PXL_ALL
-	JUMP   Loop
-
+	JUMP   Terminate
+	
 Delay:
     OUT    Timer
 	DelayLoop:
 	IN     Timer
-	ADDI   -10
+	ADDI   -2
 	JNEG   DelayLoop
 	
 	RETURN
@@ -45,6 +761,10 @@ LEDs:      EQU 001
 Timer:     EQU 002
 Hex0:      EQU 004
 Hex1:      EQU 005
+Curr:      DW  0
+Curr_A:    DW  0
+Max:       DW  &B11111111
+zero:      DW  &B0000000000000000
 uh:        DW  &B1100001100011000
 green:	   DW  &B0000011111100000
 red:       DW  &B1111100000000000
