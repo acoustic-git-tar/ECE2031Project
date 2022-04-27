@@ -1,7 +1,7 @@
 # ECE2031Project
 
 ## Introduction
-The purpose of this project is to design a peripheral for controlling NeoPixel LED strip. In our peripheral, 
+The purpose of this project is to design a peripheral for controlling NeoPixel LED strip in VHDL. In our peripheral, 
 we added functionality to change the behavior of the LED strip, from changing colors of all pixels at once 
 to auto-incrementing the lights for any pixel.
 We prioritized the minimum viable product, as these are the critical functions that our peripheral should 
